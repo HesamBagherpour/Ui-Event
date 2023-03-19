@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Infinite8.Packages.GeneralUtility.General
+namespace HB.Packages.GeneralUtility.General
 {
     /// <summary>
     /// Inherit from this base class to create a singleton.

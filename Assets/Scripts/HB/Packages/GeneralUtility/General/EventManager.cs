@@ -2,17 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Infinite8.Packages.GeneralUtility.General
+namespace HB.Packages.GeneralUtility.General
 {
     public class EventManager : MonoSingleton<EventManager>
     {
-        private Dictionary<string, EventData<object>> eventDictionary = new Dictionary<string, EventData<object>>();
+        private Dictionary<string, EventData<object>> _eventDictionary = new Dictionary<string, EventData<object>>();
 
 
         public void RegisterEvent(string eventName, UnityAction<object> listener)
         {
-            EventData<object> currentEvent = null;
-            if (eventDictionary.TryGetValue(eventName, out currentEvent))
+            if (_eventDictionary.TryGetValue(eventName, out var currentEvent))
             {
                 currentEvent.AddListener(listener);
             }
@@ -20,7 +19,7 @@ namespace Infinite8.Packages.GeneralUtility.General
             {
                 currentEvent = new EventData<object>();
                 currentEvent.AddListener(listener);
-                eventDictionary.Add(eventName, currentEvent);
+                _eventDictionary.Add(eventName, currentEvent);
             }
             Debug.unityLogger.Log($"EventManager | RegisterEvent | eventName: {eventName}");
         }
@@ -28,7 +27,7 @@ namespace Infinite8.Packages.GeneralUtility.General
         public void RemoveEvent(string eventName, UnityAction<object> listener)
         {
             EventData<object> currentEvent = null;
-            if (eventDictionary.TryGetValue(eventName, out currentEvent))
+            if (_eventDictionary.TryGetValue(eventName, out currentEvent))
             {
                 currentEvent.RemoveListener(listener);
                 Debug.unityLogger.Log($"EventManager | RemoveEvent | eventName: {eventName}");
@@ -41,14 +40,14 @@ namespace Infinite8.Packages.GeneralUtility.General
 
         public void SendEvent(string eventName, object val)
         {
-            if (eventDictionary == null)
+            if (_eventDictionary == null)
             {
                 Debug.unityLogger.LogWarning($"EventManager | SendEvent | eventName: {eventName}" , "not found");
                 return;
             }
 
             EventData<object> currentEvent = null;
-            if (eventDictionary.TryGetValue(eventName, out currentEvent))
+            if (_eventDictionary.TryGetValue(eventName, out currentEvent))
             {
                 currentEvent.Invoke(val);
             }

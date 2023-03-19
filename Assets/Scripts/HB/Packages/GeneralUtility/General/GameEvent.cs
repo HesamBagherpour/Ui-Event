@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace Infinite8.Packages.GeneralUtility.General
+namespace HB.Packages.GeneralUtility.General
 {
     [CreateAssetMenu(fileName = "ev_title", menuName = "Events/voidEvent")]
     public class GameEvent : ScriptableObject

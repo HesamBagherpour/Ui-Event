@@ -1,8 +1,7 @@
-﻿using System;
-using Infinite8.Packages.GeneralUtility.General;
+﻿using HB.Packages.GeneralUtility.General;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Sample
 {
     public class MyTest2 : MonoBehaviour
     {
